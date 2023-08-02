@@ -1,27 +1,37 @@
-abc = "abcdefghijklmnopqrstuvwxyz"
-
-shift = int(input("Please enter the number of places to shift: "))
-if not shift:
-    print("Invalid input. Please enter a valid number for the shift.")
-    exit()
-
-
-sentence = input("Please enter a sentence: ").lower()
-
-encrypted_sentence =  ""
-
-
-for char in sentence:
-    if  char.isalpha():
-         char_index = abc.find(char)
-         shift_index = (char_index + shift) % 26
-         encrypted_char = abc[shift_index]
-         if char.isupper():
-             encrypted_char = encrypted_char.upper()
-         encrypted_sentence += encrypted_char 
-    else:   
-        encrypted_sentence += encrypted_char
+def caesar_cipher_encrypt(text, shift):
+    abc = "abcdefghijklmnopqrstuvwxyz"
+    encrypted_text = ""
     
+    for char in text:
+        if char.isalpha():  # Only encrypt alphabetic characters
+            char_lower = char.lower()
+            char_index = abc.find(char_lower)
+            shifted_index = (char_index + shift) % 26
+            encrypted_char = abc[shifted_index]
+            
+            if char.isupper():
+                encrypted_char = encrypted_char.upper()  # Convert back to uppercase if the original character was uppercase
+        else:
+            encrypted_char = char  # Keep non-alphabetic characters unchanged
+        
+        encrypted_text += encrypted_char
+    
+    return encrypted_text
 
+def main():
+    try:
+        shift_str = input("Enter the number of characters for the shift: ")
+        if not shift_str.isdecimal():
+            print("Invalid input. Please enter a valid number for the shift.")
+            return
+        
+        shift = int(shift_str)
+        plain_text = input("Enter the plain text sentence: ").lower()
 
-print("Encrypted Sentence:", encrypted_sentence)
+        encrypted_text = caesar_cipher_encrypt(plain_text, shift)
+        print("Encrypted text:", encrypted_text)
+    except ValueError:
+        print("Invalid input. Please enter a valid number for the shift.")
+
+if __name__ == "__main__":
+    main()
