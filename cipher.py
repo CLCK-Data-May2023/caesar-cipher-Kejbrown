@@ -14,7 +14,7 @@ def caesar_cipher_encrypt(text, shift):
 
 def main():
     try:
-        shift_str = input("Enter the number of characters for the shift: ")
+        shift_str = input("Please enter the number of places to shift: ")
         if not shift_str.isdecimal():
             print("Invalid input. Please enter a valid number for the shift.")
             return
@@ -29,7 +29,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-   
-   
    
