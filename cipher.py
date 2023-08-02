@@ -1,32 +1,28 @@
-def caesar_cipher_encrypt(text, shift):
-    encrypted_text = ""
-    for char in text:
-        if char.isalpha():
-            if char.isupper():
-                base = ord('A')
-            else:
-                base = ord('a')
-            shifted_char = chr((ord(char) - base + shift) % 26 + base)
-            encrypted_text += shifted_char
-        else:
-            encrypted_text += char
-    return encrypted_text
+sentence = input("Please enter a sentence: ")
+sentence = sentence.lower()
 
-def main():
-    try:
-        shift_str = input("Please enter the number of places to shift: ")
-        if not shift_str.isdecimal():
-            print("Invalid input. Please enter a valid number for the shift.")
-            return
+alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+alphabet2 = alphabet * 2
+cipher = []
 
-        shift = int(shift_str)
-        plain_text = input("Enter the plain text sentence: ")
+shift = 5
+letter = 0
 
-        encrypted_text = caesar_cipher_encrypt(plain_text, shift)
-        print("The encrypted sentence is:", encrypted_text)
-    except ValueError:
-        print("Invalid input. Please enter a valid number for the shift.")
+while letter < 26:
+    replacement = alphabet2[letter + shift]
+    cipher.append(replacement)
+    letter += 1
 
-if __name__ == "__main__":
-    main()
+new_sent = []
+
+for char in sentence:
+    if char in alphabet2:
+        indexof = alphabet2.index(char)
+        var = cipher[indexof]
+        new_sent.append(var)
+    else:
+        new_sent.append(char)
+
+translated_sent = "".join(new_sent)
+print(f"The encrypted sentence is: {translated_sent}")
    
